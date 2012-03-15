@@ -28,4 +28,4 @@ To build the javadocs, run `ant javadoc'.  The javadocs should be created in:
 Sources
 =======
 
-This distribution was build from the source code originally hosted at://hkn.eecs.berkeley.edu/~dyoo/java/index.html 
+This distribution was build from the source code originally hosted at http://hkn.eecs.berkeley.edu/~dyoo/java/index.html 
