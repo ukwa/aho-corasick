@@ -24,3 +24,8 @@ Building the documentation
 To build the javadocs, run `ant javadoc'.  The javadocs should be created in:
 
     javadoc/
+
+Sources
+=======
+
+This distribution was build from the source code originally hosted at://hkn.eecs.berkeley.edu/~dyoo/java/index.html 
