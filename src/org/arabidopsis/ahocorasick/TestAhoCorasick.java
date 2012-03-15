@@ -136,6 +136,32 @@ public class TestAhoCorasick extends TestCase {
     }
 
 
+    public void testMultipleOutputs() {
+	tree.add("x".getBytes(), "x");
+	tree.add("xx".getBytes(), "xx");
+	tree.add("xxx".getBytes(), "xxx");
+	tree.prepare();
+
+	SearchResult result = tree.startSearch("xxx".getBytes());
+	assertEquals(1, result.getLastIndex());
+	assertEquals(new HashSet(Arrays.asList(new String[] {"x"})),
+		     result.getOutputs());
+
+	result = tree.continueSearch(result);
+	assertEquals(2, result.getLastIndex());
+	assertEquals(new HashSet(Arrays.asList(new String[] {"xx", "x"})),
+		     result.getOutputs());
+
+
+	result = tree.continueSearch(result);
+	assertEquals(3, result.getLastIndex());
+	assertEquals(new HashSet(Arrays.asList(new String[] {"xxx", "xx", "x"})),
+		     result.getOutputs());
+
+	assertEquals(null, tree.continueSearch(result));
+    }
+
+
     public void testIteratorInterface() {
 	tree.add("moo".getBytes(), "moo");
 	tree.add("one".getBytes(), "one");
@@ -146,27 +172,27 @@ public class TestAhoCorasick extends TestCase {
 
 	assertTrue(iter.hasNext());
 	SearchResult r = (SearchResult) iter.next();
-	assertEquals(Arrays.asList(new String[] {"on"}),
+	assertEquals(new HashSet(Arrays.asList(new String[] {"on"})),
 		     r.getOutputs());
 	assertEquals(2, r.getLastIndex());
 
 
 	assertTrue(iter.hasNext());
 	r = (SearchResult) iter.next();
-	assertEquals(Arrays.asList(new String[] {"one", "ne"}),
+	assertEquals(new HashSet(Arrays.asList(new String[] {"one", "ne"})),
 		     r.getOutputs());
 	assertEquals(3, r.getLastIndex());
 
 
 	assertTrue(iter.hasNext());
 	r = (SearchResult) iter.next();
-	assertEquals(Arrays.asList(new String[] {"moo"}),
+	assertEquals(new HashSet(Arrays.asList(new String[] {"moo"})),
 		     r.getOutputs());
 	assertEquals(7, r.getLastIndex());
 	
 	assertTrue(iter.hasNext());
 	r = (SearchResult) iter.next();
-	assertEquals(Arrays.asList(new String[] {"on"}),
+	assertEquals(new HashSet(Arrays.asList(new String[] {"on"})),
 		     r.getOutputs());
 	assertEquals(8, r.getLastIndex());
 
@@ -211,7 +237,7 @@ public class TestAhoCorasick extends TestCase {
 	    termsThatHit.addAll(result.getOutputs());
 	}
 	assertEquals
-	    (Arrays.asList(new String[] {
+	    (new HashSet(Arrays.asList(new String[] {
 		"cytochrome",
 		"GA3",
 		"cytochrome P450",
@@ -222,7 +248,7 @@ public class TestAhoCorasick extends TestCase {
 		"ent-kaurene oxidase activity",
 		"inflorescence",
 		"tissue",
-	    }), termsThatHit);
+		    })), termsThatHit);
 	
     }
 }

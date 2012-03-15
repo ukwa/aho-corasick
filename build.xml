@@ -5,6 +5,7 @@
 <property name="build" value="build"/>
 <property name="dist" value="dist"/>
 <property name="javadoc" value="javadoc"/>
+<property name="version" value="1.1"/>
 
 
 <!-- Load other global properties from local home directory -->
@@ -54,7 +55,7 @@
 
 
 <target name="jar" depends="clean,compile">
-   <jar destfile="${dist}/org.arabidopsis.ahocorasick.jar" 
+   <jar destfile="${dist}/org.arabidopsis.ahocorasick-${version}.jar" 
         basedir="${build}"/>
 </target>
 
@@ -65,7 +66,7 @@
 
 <!-- console test using junit -->
 <target name="junit" depends="compile">
-    <java fork="true" classname="junit.textui.TestRunner"
+    <java fork="true" classname="junit.swingui.TestRunner"
           taskname="junit" failonerror="true">
         <arg value="org.arabidopsis.ahocorasick.TestAll"/>
         <classpath>

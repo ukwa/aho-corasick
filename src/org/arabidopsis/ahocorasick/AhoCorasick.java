@@ -26,6 +26,16 @@ import java.util.Iterator;
        }
    </pre></code>
    </p>
+
+   <h2>Recent changes</h2>
+   <ul>
+
+   <li>Per user request from Carsten Kruege, I've
+   changed the signature of State.getOutputs() and
+   SearchResults.getOutputs() to Sets rather than Lists.
+   </li>
+
+   </ul>
  */
 public class AhoCorasick {
     private State root;

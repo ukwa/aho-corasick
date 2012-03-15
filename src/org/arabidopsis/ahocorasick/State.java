@@ -1,7 +1,7 @@
 package org.arabidopsis.ahocorasick;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -22,7 +22,7 @@ class State {
     private int depth;
     private EdgeList edgeList;
     private State fail;
-    private List outputs;
+    private Set outputs;
 
     public State(int depth) {
 	this.depth = depth;
@@ -31,7 +31,7 @@ class State {
 	else
 	    this.edgeList = new DenseEdgeList();
 	this.fail = null;
-	this.outputs = new ArrayList();
+	this.outputs = new HashSet();
     }
 
 
@@ -99,7 +99,7 @@ class State {
     }
 
 
-    public List getOutputs() {
+    public Set getOutputs() {
 	return this.outputs;
     }
 }

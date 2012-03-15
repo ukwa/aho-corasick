@@ -1,6 +1,6 @@
 package org.arabidopsis.ahocorasick;
 
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -25,7 +25,7 @@ public class SearchResult {
     /**
        Returns a list of the outputs of this match.
      */
-    public List getOutputs() {
+    public Set getOutputs() {
 	return lastMatchedState.getOutputs();
     }
 

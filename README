@@ -15,7 +15,7 @@ Building the jar
 To compile the jar, run `ant jar'.  The resulting jar should be
 created in:
 
-    dist/org.arabidopsis.ahocorasick.jar
+    dist/org.arabidopsis.ahocorasick-1.1.jar
 
 
 Building the documentation
