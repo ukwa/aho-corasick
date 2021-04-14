@@ -12,7 +12,7 @@ import java.util.Iterator;
 
    <p>
    Example usage:
-   <code><pre>
+   <pre><code>
        AhoCorasick tree = new AhoCorasick();
        tree.add("hello".getBytes(), "hello");
        tree.add("world".getBytes(), "world");
@@ -24,8 +24,7 @@ import java.util.Iterator;
            System.out.println(result.getOutputs());
            System.out.println("Found at index: " + result.getLastIndex());
        }
-   </pre></code>
-   </p>
+   </code></pre>
 
    <h2>Recent changes</h2>
    <ul>
