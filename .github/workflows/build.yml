@@ -1,0 +1,41 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - uses: burrunan/gradle-cache-action@cbdf4342ff988d143aa7a5aeceedffafb8c74bcf #v1.10
+        name: Build with Gradle
+        with:
+          arguments: build
+          # Ignore warning about missing checksum validation thrown by the action since we are using the wrapper-validation-action to verify the checksum
+          gradle-distribution-sha-256-sum-warning: false
+
+      - uses: burrunan/gradle-cache-action@cbdf4342ff988d143aa7a5aeceedffafb8c74bcf #v1.10
+        name: Publish
+        if: ${{ github.ref == 'refs/heads/master' && github.repository == 'pkware/aho-corasick' }}
+        with:
+          arguments: publish
+          # Ignore warning about missing checksum validation thrown by the action since we are using the wrapper-validation-action to verify the checksum
+          gradle-distribution-sha-256-sum-warning: false
+          properties: |
+            SONATYPE_NEXUS_USERNAME=${{ secrets.SONATYPE_NEXUS_USERNAME }}
+            SONATYPE_NEXUS_PASSWORD=${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+            signingKey=${{ secrets.SIGNING_KEY }}
+            signingPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
