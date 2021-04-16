@@ -23,7 +23,7 @@ jobs:
       - uses: burrunan/gradle-cache-action@cbdf4342ff988d143aa7a5aeceedffafb8c74bcf #v1.10
         name: Build with Gradle
         with:
-          arguments: build
+          arguments: build sign
           # Ignore warning about missing checksum validation thrown by the action since we are using the wrapper-validation-action to verify the checksum
           gradle-distribution-sha-256-sum-warning: false
 
